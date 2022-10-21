@@ -5,4 +5,5 @@
 ``` cd express-ts-server 
     yarn install
     
-    yarn run dev```
+    yarn run dev
+```
