@@ -16,12 +16,10 @@ import {
   ORIGIN,
   CREDENTIALS,
 } from './configs';
-
 import { ResponseHandler } from './utils';
 import BugsController from './modules/bugs/bugs.controller';
 import { RoutingModule } from './modules/app.routing.module';
 import { HttpException } from './exceptions/httpExecption';
-
 class AppContainer {
   private _app: express.Application;
   private _port: string | number;
@@ -35,7 +33,6 @@ class AppContainer {
     this._initializeRouting();
     this._initializeErrors();
   }
-
   //   initialDatebase
   /**
    * @initialDatebase
@@ -45,6 +42,7 @@ class AppContainer {
     if (this._env !== 'production') {
       set('debug', true);
     }
+
     connect(DatabaseOptions.url, DatabaseOptions.options, () => {
       console.log(`======= DataBase: ${DB_DATABASE} =======`);
       console.log(`🚀 Database connected`);
@@ -89,6 +87,7 @@ class AppContainer {
    *
    */
   private _initializeMiddleware() {
+    this._app.use(compression());
     this._app.use(device?.capture());
     this._app.use(morgan(LOG_FORMAT));
     this._app.use(
@@ -99,13 +98,13 @@ class AppContainer {
     this._app.use(express.urlencoded({ extended: true, limit: '50mb' }));
     this._app.use(hpp());
     this._app.use(helmet());
-    this._app.disable('x-powered-by');
-    this._app.use(
-      compression({
-        level: 1,
-      }),
-    );
     this._app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this._app.disable('x-powered-by');
+    this._app.use((_req, res, next) => {
+      res.setHeader('X-XSS-Protection', '1; mode=block');
+      next();
+    });
+    // this._app.use(monitor());
   }
 
   //   _initialRouting

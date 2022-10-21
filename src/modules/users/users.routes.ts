@@ -13,7 +13,7 @@ import LoginLogsController from './loginlogs/loginlogs.controller';
 import UserController from './users.controller';
 
 class UserRoutes implements AppRoutes {
-  path: string = '/api/users';
+  readonly path: string = '/api/users';
   router: Router = Router();
   _userController = new UserController();
   _loginLogsController = new LoginLogsController();

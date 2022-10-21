@@ -69,7 +69,7 @@ const Authentication = async (
   } catch (err) {
     return ResponseHandler.SendResponse(
       res,
-      httpStatus.UNAUTHORIZED,
+      httpStatus.BAD_GATEWAY,
       false,
       null,
       err,
@@ -117,7 +117,7 @@ const AuthenticationForLogout = async (
   } catch (err) {
     return ResponseHandler.SendResponse(
       res,
-      httpStatus.UNAUTHORIZED,
+      httpStatus.BAD_GATEWAY,
       false,
       null,
       err,

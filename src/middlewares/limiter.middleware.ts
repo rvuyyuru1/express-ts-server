@@ -46,3 +46,16 @@ export const userBruteforce = new ExpressBrute(store, {
   failCallback: failCallback,
   handleStoreError: handleStoreError,
 });
+
+export const GlobalLimiter = (limitervalue: number) => {
+  return new ExpressBrute(store, {
+    freeRetries: limitervalue,
+    attachResetToRequest: false,
+    refreshTimeoutOnRequest: false,
+    minWait: 5 * 60 * 1000, // 5 minutes
+    maxWait: 5 * 60 * 1000, // 1 hour,
+    lifetime: 5 * 59 * 1000,
+    failCallback: failCallback,
+    handleStoreError: handleStoreError,
+  }).prevent;
+};

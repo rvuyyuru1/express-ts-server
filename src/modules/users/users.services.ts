@@ -152,7 +152,7 @@ class UserService {
     if (user) {
       let userdetails = await this._userModel
         .findById({ _id: user.user_id })
-        .select('-password');
+        .select('-password ');
       if (userdetails)
         ResponseHandler.SendResponse(
           res,

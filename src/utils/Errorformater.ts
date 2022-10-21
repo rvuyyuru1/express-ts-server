@@ -91,11 +91,11 @@ function CustomErrorResponse(
   }
 }
 
-function buildErrorString(error, container) {
+function buildErrorString(error: any, container: string) {
   let ret = `Error validating ${container}.`;
-  let details = error.error.details;
+  let details = error?.error?.details;
   for (let i = 0; i < details.length; i++) {
-    ret += ` ${details[i].message}.`;
+    ret += `${details[i].message}.`;
   }
   return ret;
 }

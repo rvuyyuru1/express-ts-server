@@ -148,7 +148,7 @@ const GetQuerySendResponse = async (
       .select(selectQuery)
       .sort(sortQuery)
       .skip((page - 1) * size)
-      .limit(size * 1)
+      .limit(size)
       .populate(populate);
     pulledData.totalData = await model.countDocuments(searchQuery);
     return pulledData;
