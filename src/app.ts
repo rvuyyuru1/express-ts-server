@@ -28,17 +28,17 @@ class AppContainer {
   constructor() {
     this._app = express();
     this._port = PORT || 3000;
-    this._initializeDatebase();
+    this._initializeDatabase();
     this._initializeMiddleware();
     this._initializeRouting();
     this._initializeErrors();
   }
-  //   initialDatebase
+  //   initialDatabase
   /**
-   * @initialDatebase
+   * @initialDatabase
    *
    */
-  private _initializeDatebase() {
+  private _initializeDatabase() {
     if (this._env !== 'production') {
       set('debug', true);
     }
